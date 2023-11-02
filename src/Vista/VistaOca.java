@@ -57,7 +57,6 @@ public class VistaOca extends JFrame {
 	public JPanel panelCasilla1;
 	public JPanel panelCasilla2;
 	public JButton btnCasilla2;
-	public JButton btnCasilla1;
 	private JLabel lblNewLabel_2;
 
 	/**
@@ -115,6 +114,7 @@ public class VistaOca extends JFrame {
 		btnJugar = new JButton("");
 		btnJugar.setIcon(new ImageIcon("Imagenes/FlechaJugarBuena.png"));
 		btnJugar.setBounds(729, 567, 100, 88);
+		btnJugar.setVisible(false);
 		panelInicio.add(btnJugar);
 
 		lblSeleccionaElColor = new JLabel("Selecciona el personaje que quieres ser:");
@@ -156,16 +156,10 @@ public class VistaOca extends JFrame {
 		panelJuego.add(btnMostrarPregunta);
 
 		panelCasilla1 = new JPanel();
+		panelCasilla1.setBackground(Color.YELLOW);
 		panelCasilla1.setBounds(0, 612, 152, 74);
 		panelJuego.add(panelCasilla1);
 		panelCasilla1.setLayout(null);
-
-		btnCasilla1 = new JButton("");
-		btnCasilla1.setBounds(0, 0, 152, 74);
-		panelCasilla1.add(btnCasilla1);
-		btnCasilla1.setIcon(new ImageIcon(
-				"C:\\Users\\Luis Jesus\\Desktop\\2\u00BADAM\\Interfaces\\Ejercicios_Interfaces\\Oca\\Imagenes\\Fondo.jfif"));
-		btnCasilla1.setVerticalAlignment(SwingConstants.TOP);
 		// btnCasilla1.setVisible(false);
 
 		lblFichaXokas = new JLabel("");
@@ -180,33 +174,22 @@ public class VistaOca extends JFrame {
 		panelCasilla1.add(lblFichaLlados);
 		lblFichaLlados.setVisible(false);
 
-		lblNewLabel_3 = new JLabel("New label");
+		lblNewLabel_3 = new JLabel("");
 		lblNewLabel_3.setBounds(48, 10, 26, 35);
 		panelCasilla1.add(lblNewLabel_3);
 		lblNewLabel_3.setVisible(false);
 
-		lblNewLabel_4 = new JLabel("New label");
+		lblNewLabel_4 = new JLabel("");
 		lblNewLabel_4.setBounds(10, 10, 26, 35);
 		panelCasilla1.add(lblNewLabel_4);
 		lblNewLabel_4.setVisible(false);
 
-		
-		JPanel panelFondo2 = new JPanel();
-		panelFondo2.setBounds(152, 612, 75, 74);
-		panelJuego.add(panelFondo2);
-		panelFondo2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		panelFondo2.setVisible(true);
-		
-
-		
-		
-
-		
 		panelCasilla2 = new JPanel();
-		panelCasilla2.setBounds(0, 0, 75, 74);
-		panelFondo2.add(panelCasilla2);
-		
-		
+		panelCasilla2.setBackground(Color.ORANGE);
+		panelCasilla2.setBounds(152, 612, 75, 74);
+		panelJuego.add(panelCasilla2);
+		panelCasilla2.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		panelCasilla2.setVisible(true);
 
 		panelDados = new JPanel();
 		panelDados.setBounds(691, 10, 187, 246);
@@ -228,15 +211,6 @@ public class VistaOca extends JFrame {
 		lblRetroalimentacionJuego = new JLabel("");
 		lblRetroalimentacionJuego.setBounds(691, 293, 187, 269);
 		panelPrincipal.add(lblRetroalimentacionJuego);
-
-		lblNewLabel_2 = new JLabel("New label");
-		lblNewLabel_2.setBounds(152, 0, 75, 74);
-		/*
-		 * JLabel lblFondoInicio = new JLabel(""); lblFondoInicio.setIcon(new
-		 * ImageIcon("C:\\Users\\Luis Jesus\\Desktop\\2\u00BADAM\\Interfaces\\Ejercicios_Interfaces\\Oca\\Imagenes\\Fondo.jfif"
-		 * )); lblFondoInicio.setBounds(0, 0, 888, 706);
-		 * panelInicio.add(lblFondoInicio);
-		 */
 
 		panelPreguntas = new JPanel();
 		panelPreguntas.setBounds(232, 105, 349, 374); // Establece las coordenadas y el tamaño
@@ -263,6 +237,15 @@ public class VistaOca extends JFrame {
 		btnResponder = new JButton("Responder");
 		btnResponder.setBounds(26, 254, 276, 30); // Ajusta las coordenadas y el tamaño según tus necesidades
 		panelPreguntas.add(btnResponder);
+
+		lblNewLabel_2 = new JLabel("New label");
+		lblNewLabel_2.setBounds(152, 0, 75, 74);
+		/*
+		 * JLabel lblFondoInicio = new JLabel(""); lblFondoInicio.setIcon(new
+		 * ImageIcon("C:\\Users\\Luis Jesus\\Desktop\\2\u00BADAM\\Interfaces\\Ejercicios_Interfaces\\Oca\\Imagenes\\Fondo.jfif"
+		 * )); lblFondoInicio.setBounds(0, 0, 888, 706);
+		 * panelInicio.add(lblFondoInicio);
+		 */
 
 		for (int i = 0; i < colores.size(); i++) {
 			comboBox.addItem(colores.get(i));

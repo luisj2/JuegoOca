@@ -52,18 +52,28 @@ public class ControladorOca implements ActionListener {
 		 * String seleccion = vista.comboBox.getSelectedItem().toString();
 		 * JOptionPane.showMessageDialog(vista, seleccion);
 		 */
+		
+		//FUNCIONES EXTRA
 
 		if (vista.radiobtnRespuesta1.isSelected()) {
 			vista.radiobtnRespuesta2.setSelected(false);
 			vista.radiobtnRespuesta3.setSelected(false);
-		} else if (vista.radiobtnRespuesta2.isSelected()) {
+		}
+		if (vista.radiobtnRespuesta2.isSelected()) {
 			vista.radiobtnRespuesta1.setSelected(false);
 			vista.radiobtnRespuesta3.setSelected(false);
-		} else if (vista.radiobtnRespuesta3.isSelected()) {
+		}
+		if (vista.radiobtnRespuesta3.isSelected()) {
 			vista.radiobtnRespuesta1.setSelected(false);
 			vista.radiobtnRespuesta2.setSelected(false);
+			
+			
+			
+			
+			
 		}
 		if (e.getSource() == vista.btnMostrarPregunta) {
+			
 			int preguntaRandom = (int) (Math.random() * preguntas.size());
 			pregunta = preguntas.get(preguntaRandom);
 
@@ -71,9 +81,11 @@ public class ControladorOca implements ActionListener {
 			vista.radiobtnRespuesta1.setText(pregunta.getRespuestas().get(0));
 			vista.radiobtnRespuesta2.setText(pregunta.getRespuestas().get(1));
 			vista.radiobtnRespuesta3.setText(pregunta.getRespuestas().get(2));
-
-			if (!vista.panelPreguntas.isVisible()) {
+			
+			
+			if (!vista.panelPreguntas.isVisible() && vista.panelPrincipal.isVisible()) {
 				vista.panelPreguntas.setVisible(true);
+				vista.panelPrincipal.setVisible(false);
 			}
 
 		}
@@ -85,7 +97,9 @@ public class ControladorOca implements ActionListener {
 					vista.lblRetroalimentacionJuego.setText("");
 					vista.lblRetroalimentacionJuego.setForeground(Color.green);
 					vista.lblRetroalimentacionJuego.setText("Respuesta correcta");
-					vista.radiobtnRespuesta1.setSelected(false);
+					vista.panelPrincipal.setVisible(false);
+					vista.panelPrincipal.setVisible(true);
+					//vista.radiobtnRespuesta1.setSelected(false);
 				} else {
 					vista.lblRetroalimentacionJuego.setText("");
 					vista.lblRetroalimentacionJuego.setForeground(Color.red);
@@ -97,6 +111,8 @@ public class ControladorOca implements ActionListener {
 					vista.lblRetroalimentacionJuego.setText("");
 					vista.lblRetroalimentacionJuego.setForeground(Color.green);
 					vista.lblRetroalimentacionJuego.setText("Respuesta correcta");
+					vista.panelPrincipal.setVisible(false);
+					vista.panelPrincipal.setVisible(true);
 					vista.radiobtnRespuesta2.setSelected(false);
 				} else {
 					vista.lblRetroalimentacionJuego.setText("");
@@ -109,6 +125,8 @@ public class ControladorOca implements ActionListener {
 					vista.lblRetroalimentacionJuego.setText("");
 					vista.lblRetroalimentacionJuego.setForeground(Color.green);
 					vista.lblRetroalimentacionJuego.setText("Respuesta correcta");
+					vista.panelPrincipal.setVisible(false);
+					vista.panelPrincipal.setVisible(true);
 					vista.radiobtnRespuesta1.setSelected(false);
 				} else {
 					vista.lblRetroalimentacionJuego.setText("");
@@ -162,6 +180,10 @@ public class ControladorOca implements ActionListener {
 
 						vista.listaJugadores.setModel(modelo);
 						vista.textPaneNombres.setText("");
+						
+						if(modelo.size() >= 2) {
+							vista.btnJugar.setVisible(true);
+							
 
 						/*
 						 * for (int i = 0; i < vista.colores.size(); i++) { String colorEliminar =
@@ -196,6 +218,7 @@ public class ControladorOca implements ActionListener {
 
 				vista.panelInicio.setVisible(false);
 				vista.panelPrincipal.setVisible(true);
+				
 
 			} else {
 				vista.lblRetroalimentacion.setText("");
@@ -204,6 +227,7 @@ public class ControladorOca implements ActionListener {
 		}
 		if (e.getSource() == vista.btnTirarDados) {
 			tirarDados(vista);
+		}
 		}
 
 	}
