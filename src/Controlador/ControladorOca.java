@@ -56,12 +56,10 @@ public class ControladorOca implements ActionListener {
 		if (vista.radiobtnRespuesta1.isSelected()) {
 			vista.radiobtnRespuesta2.setSelected(false);
 			vista.radiobtnRespuesta3.setSelected(false);
-		}
-		else if (vista.radiobtnRespuesta2.isSelected()) {
+		} else if (vista.radiobtnRespuesta2.isSelected()) {
 			vista.radiobtnRespuesta1.setSelected(false);
 			vista.radiobtnRespuesta3.setSelected(false);
-		}
-		else if (vista.radiobtnRespuesta3.isSelected()) {
+		} else if (vista.radiobtnRespuesta3.isSelected()) {
 			vista.radiobtnRespuesta1.setSelected(false);
 			vista.radiobtnRespuesta2.setSelected(false);
 		}
@@ -311,29 +309,26 @@ public class ControladorOca implements ActionListener {
 
 		for (Jugador jugador : jugadores) {
 			if (jugador.getPersonaje().equalsIgnoreCase("llados")) {
-				
-		
+
 				vista.panelCasilla1.remove(vista.lblFichaLlados);
 				vista.panelCasilla2.add(vista.lblFichaLlados);
-				
+
 				vista.lblFichaLlados.setVisible(true);
-				
+
 			}
 			if (jugador.getPersonaje().equalsIgnoreCase("elxokas")) {
-				
+
 				vista.panelCasilla1.remove(vista.lblFichaXokas);
 				vista.panelCasilla2.add(vista.lblFichaXokas);
-				
+
 				vista.lblFichaXokas.setVisible(true);
 			}
 
-			
 			vista.revalidate();
 			vista.repaint();
-			
+
 		}
 
 	}
-	
 
 }
