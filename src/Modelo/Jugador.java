@@ -1,10 +1,15 @@
 package Modelo;
 
+import javax.swing.JLabel;
+
 public class Jugador {
 
 	private String nombre;
 	private String personaje;
 	private int casilla;
+	private int turnosRestantes;
+	private boolean activo;
+	private JLabel lable;
 	
 	
 	public Jugador() {
@@ -12,11 +17,44 @@ public class Jugador {
 	}
 
 
-	public Jugador(String nombre, String personaje) {
+	public Jugador(String nombre, String personaje,JLabel label) {
 		super();
 		this.nombre = nombre;
 		this.personaje = personaje;
 		this.casilla = 1;
+		this.turnosRestantes = 0;
+		this.activo = true;
+		this.lable = lable;
+	}
+
+
+	public JLabel getLable() {
+		return lable;
+	}
+
+
+	public void setLable(JLabel lable) {
+		this.lable = lable;
+	}
+
+
+	public int getTurnosRestantes() {
+		return turnosRestantes;
+	}
+
+
+	public void setTurnosRestantes(int turnosRestantes) {
+		this.turnosRestantes = turnosRestantes;
+	}
+
+
+	public boolean isActivo() {
+		return activo;
+	}
+
+
+	public void setActivo(boolean activo) {
+		this.activo = activo;
 	}
 
 
@@ -55,8 +93,12 @@ public class Jugador {
 
 	@Override
 	public String toString() {
-		return "Jugador [nombre=" + nombre + ", color=" + personaje + ", casilla=" + casilla + "]";
+		return "Jugador [nombre=" + nombre + ", personaje=" + personaje + ", casilla=" + casilla + ", turnosRestantes="
+				+ turnosRestantes + ", activo=" + activo + "]";
 	}
+
+
+	
 	
 	
 	
