@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.sound.sampled.AudioSystem;
@@ -20,9 +21,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import Modelo.CasillaPosicion;
 import Modelo.Jugador;
-import Modelo.PanelNumero;
-import Modelo.Paneles;
 import Modelo.Pregunta;
 import Vista.VistaOca;
 
@@ -35,9 +35,9 @@ public class ControladorOca implements ActionListener {
 	ArrayList<Pregunta> preguntas = rellenarPreguntasLlados();
 	Pregunta pregunta = new Pregunta();
 	int turno = 0;
-	ArrayList<PanelNumero> numPanel = new ArrayList<>();
 	Map <Integer,Integer> getOcas = rellenarOcas();
-	Paneles paneles;
+	Map <Integer,CasillaPosicion> posiciones = rellenarPosiciones();
+
 	
 	
 
@@ -55,8 +55,8 @@ public class ControladorOca implements ActionListener {
 		this.vista.btnResponder.addActionListener(this);
 		this.vista.btnImprimir.addActionListener(this);
 		
-		//rellenarCasillas(frame);
-		paneles = new Paneles(frame);
+		
+		
 	}
 	
 	
@@ -99,28 +99,12 @@ public class ControladorOca implements ActionListener {
 		*/
 		
 		if(e.getSource() == vista.btnImprimir) {
-			String resultado = "";
-			//numPanel = rellenarCasillas(vista);
 			
-			numPanel.add(new PanelNumero(1,vista.panelCasilla1));
-			numPanel.add(new PanelNumero(2,vista.panelCasilla2));
-			numPanel.add(new PanelNumero(3,vista.panelCasilla3));
-			numPanel.add(new PanelNumero(4,vista.panelCasilla4));
-			numPanel.add(new PanelNumero(5,vista.panelCasilla5));
 			
-			if(paneles.getPaneles() == null) {
-				vista.lblRetroalimentacionJuego.setText("Es null");
-			}
-			if(!paneles.getPaneles().isEmpty()) {
-				for (PanelNumero numPanel : numPanel) {
-					resultado += numPanel.getCasilla() +":"+numPanel.getPanel().getName();
-				}
-				vista.lblRetroalimentacionJuego.setText(resultado);
-			}else {
-				vista.lblRetroalimentacionJuego.setText("Vacio");
-			}
+			
 			
 		}
+		
 		//mostrar una pregunta aleatoria del arraylist de Pregunta
 		if (e.getSource() == vista.btnMostrarPregunta) {
 			
@@ -307,7 +291,7 @@ public class ControladorOca implements ActionListener {
 		}
 		//toda la funcionalidad de tirar los dados y de mover la ficha
 		if (e.getSource() == vista.btnTirarDados) {
-			rellenarCasillas(vista);
+			//rellenarCasillas(vista);
 			int totalDados = tirarDados(vista);
 			
 				//vista.lblRetroalimentacionJuego.setText(paneles.getPaneles().get(2).getPanel().getName());
@@ -330,18 +314,21 @@ public class ControladorOca implements ActionListener {
 					int posicionAntigua = jugadores.get(turno).getCasilla();
 					int posicionNueva = casillaMovimiento;
 					
-					//vista.lblRetroalimentacionJuego.setText("antigua:" +posicionAntigua+" nueva:" +posicionNueva);
 
 					
-					if(numPanel.get(posicionAntigua) != null) {
+					//vista.lblRetroalimentacionJuego.setText("Posicion antigua"+posicionAntigua);
+					
 						//LE PASO LA VISTA PARA PONER MENSAJES,EL PANEL DE LA POSICION ANTIGUA,EL JUGADOR,Y las nuevas posiciones,
 						//PD:No me acuerdo por que le paso 2 iguales
-						actualizarPosicion(vista,numPanel.get(posicionAntigua).getPanel(),jugadores.get(turno),casillaMovimiento,posicionNueva);
+						vista.lblRetroalimentacionJuego.setText("antigua:" +posicionAntigua+" nueva:" +posicionNueva);
+						actualizarPosicion(jugadores.get(turno),posicionNueva);
+						
 						
 					}else {
 						vista.lblRetroalimentacionJuego.setText("");
 						vista.lblRetroalimentacionJuego.setText("El panel es null");
 					}
+					
 					
 					if(turno == jugadores.size()) {
 						turno = 0;
@@ -352,11 +339,13 @@ public class ControladorOca implements ActionListener {
 					//SI EL JUGADOR NO PUEDE JUGAR EN EL TURNO, POR EJEMPLO SI ESTA EN LA CARCEL
 				}else if(jugadores.get(turno).getTurnosRestantes() >0 && jugadores.get(turno).isActivo()) {
 					jugadores.get(turno).setTurnosRestantes(jugadores.get(turno).getTurnosRestantes()-1);
+					vista.lblRetroalimentacionJuego.setText("");
+					vista.lblRetroalimentacionJuego.setText("Se ha modificado los turnos del jugador "+jugadores.get(turno).getNombre()+" ahora le quedan "+jugadores.get(turno).getTurnosRestantes()+" turnos");
 					
 				}
 				
 			}
-		}
+		
 		
 
 	
@@ -371,38 +360,50 @@ public class ControladorOca implements ActionListener {
 	}
 
 	//actualizar las posicion de la ficha segun lo que le ha salido en los dados
-	public void actualizarPosicion(VistaOca vista, JPanel panel, Jugador jugador, int casillaMovimiento, int posicionNueva) {
+	public void actualizarPosicion(Jugador jugador, int posicionNueva) {
 	    
-		//Aqui es donde se me complica
-		//
-		//del panel en el que estaba la pieza antes elimino la ficha
-		panel.remove(jugador.getLable());
+		actualizarPanel(posicionNueva,jugador);
+	
 		
-		//le pongo la nueva casilla a la que se va a mover
-	    jugador.setCasilla(casillaMovimiento);
-	    
-	    //compruebo que la nueva posicion sea valida
-	    if (posicionNueva >= 0 && posicionNueva < numPanel.size()) {
-	       // JPanel destinoPanel = numPanel.get(posicionNueva).getPanel();
-
-	    	//si en el arraylist de numeros/paneles existe la nueva posicion y en el label tengo una ficha registrada
-	        if ( numPanel.get(posicionNueva).getPanel() != null && jugador.getLable() != null) {
-	        	//pongo un mensaje
-	        	vista.lblRetroalimentacionJuego.setText("nombre panel: " + numPanel.get(posicionNueva).getPanel().getName());	
-	        	 //añado en el panel nuevo la ficha de mi jugador
-	        	numPanel.get(posicionNueva).getPanel().add(jugador.getLable());
-	           
-	           
-	        } else {
-	            vista.lblRetroalimentacionJuego.setText("El panel de destino es nulo o jugador.getLable() es nulo");
-	        }
-	    } else {
-	        vista.lblRetroalimentacionJuego.setText("Posición nueva fuera de rango");
-	    }
+		
+		
 	    //actualizo lo realizado
 	    vista.revalidate();
         vista.repaint();
 	}
+
+
+
+	private void actualizarPanel(int casillaActualizar,Jugador jugador) {
+	CasillaPosicion posicion= posiciones.get(casillaActualizar);
+		switch (casillaActualizar) {
+		case 1:
+			
+			break;
+		case 3:
+			vista.lblFichaLlados.setLocation(posicion.getX(),posicion.getY());
+			
+			break;
+			
+
+		default:
+			break;
+		}
+	}
+	
+	public Map<Integer,CasillaPosicion> rellenarPosiciones() {
+		Map <Integer,CasillaPosicion> posiciones = new HashMap<>();
+		
+		posiciones.put(3,new CasillaPosicion(168,501));
+		
+		return posiciones;
+	}
+
+
+
+
+
+
 
 
 
@@ -546,18 +547,8 @@ public class ControladorOca implements ActionListener {
 
 	}
 	
-	//rellenar las relacciones entre numero de casilla y Jpanel que le corresponde
-	public ArrayList<PanelNumero> rellenarCasillas(VistaOca vista){
-		ArrayList <PanelNumero> casillas = new ArrayList<>();
-		
-		casillas.add(new PanelNumero(1,vista.panelCasilla1));
-		casillas.add(new PanelNumero(2,vista.panelCasilla2));
-		casillas.add(new PanelNumero(3,vista.panelCasilla3));
-		casillas.add(new PanelNumero(4,vista.panelCasilla4));
-		casillas.add(new PanelNumero(5,vista.panelCasilla5));
-		
-		return casillas;
-	}
+	
+	
 	
 	//rellenar las casillas que contienen ocas
 	public Map<Integer,Integer> rellenarOcas (){
