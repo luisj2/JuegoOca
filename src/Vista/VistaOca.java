@@ -93,6 +93,56 @@ public class VistaOca extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+						
+								panelInicio = new JPanel();
+								panelInicio.setBackground(new Color(128, 0, 255));
+								panelInicio.setBounds(0, 0, 888, 706);
+								contentPane.add(panelInicio);
+								panelInicio.setLayout(null);
+								
+										JLabel lblNewLabel = new JLabel("Introduce el nombre del jugador");
+										lblNewLabel.setBounds(292, 55, 245, 23);
+										panelInicio.add(lblNewLabel);
+										
+												textPaneNombres = new JTextPane();
+												textPaneNombres.setBounds(292, 88, 265, 19);
+												panelInicio.add(textPaneNombres);
+												
+														listaJugadores = new JList();
+														listaJugadores.setBounds(10, 59, 200, 200);
+														panelInicio.add(listaJugadores);
+														
+																JLabel lblJugadores = new JLabel("Jugadores");
+																lblJugadores.setBounds(62, 26, 134, 23);
+																panelInicio.add(lblJugadores);
+																
+																		btnJugar = new JButton("");
+																		btnJugar.setIcon(new ImageIcon("Imagenes/FlechaJugarBuena.png"));
+																		btnJugar.setBounds(729, 567, 100, 88);
+																		btnJugar.setVisible(false);
+																		panelInicio.add(btnJugar);
+																		
+																				lblSeleccionaElColor = new JLabel("Selecciona el personaje que quieres ser:");
+																				lblSeleccionaElColor.setBounds(341, 146, 216, 23);
+																				panelInicio.add(lblSeleccionaElColor);
+																				
+																						comboBox = new JComboBox();
+																						comboBox.setBounds(397, 190, 69, 21);
+																						panelInicio.add(comboBox);
+																						
+																								lblRetroalimentacion = new JLabel("");
+																								lblRetroalimentacion.setForeground(new Color(255, 0, 0));
+																								lblRetroalimentacion.setBounds(264, 353, 340, 192);
+																								panelInicio.add(lblRetroalimentacion);
+																								
+																										btnAniadirJugador = new JButton("A\u00F1adir Jugador");
+																										btnAniadirJugador.setBounds(365, 260, 148, 21);
+																										panelInicio.add(btnAniadirJugador);
+																										
+																												ImagenFicha = new JLabel("");
+																												ImagenFicha.setIcon(new ImageIcon("Imagenes/lladosbuena.png"));
+																												ImagenFicha.setBounds(567, 164, 100, 91);
+																												panelInicio.add(ImagenFicha);
 				
 						panelPrincipal = new JPanel();
 						panelPrincipal.setBounds(0, 0, 888, 740);
@@ -177,56 +227,6 @@ public class VistaOca extends JFrame {
 																																						lblRetroalimentacionJuego = new JLabel("");
 																																						lblRetroalimentacionJuego.setBounds(691, 293, 187, 269);
 																																						panelPrincipal.add(lblRetroalimentacionJuego);
-		
-				panelInicio = new JPanel();
-				panelInicio.setBackground(new Color(128, 0, 255));
-				panelInicio.setBounds(0, 0, 888, 706);
-				contentPane.add(panelInicio);
-				panelInicio.setLayout(null);
-				
-						JLabel lblNewLabel = new JLabel("Introduce el nombre del jugador");
-						lblNewLabel.setBounds(292, 55, 245, 23);
-						panelInicio.add(lblNewLabel);
-						
-								textPaneNombres = new JTextPane();
-								textPaneNombres.setBounds(292, 88, 265, 19);
-								panelInicio.add(textPaneNombres);
-								
-										listaJugadores = new JList();
-										listaJugadores.setBounds(10, 59, 200, 200);
-										panelInicio.add(listaJugadores);
-										
-												JLabel lblJugadores = new JLabel("Jugadores");
-												lblJugadores.setBounds(62, 26, 134, 23);
-												panelInicio.add(lblJugadores);
-												
-														btnJugar = new JButton("");
-														btnJugar.setIcon(new ImageIcon("Imagenes/FlechaJugarBuena.png"));
-														btnJugar.setBounds(729, 567, 100, 88);
-														btnJugar.setVisible(false);
-														panelInicio.add(btnJugar);
-														
-																lblSeleccionaElColor = new JLabel("Selecciona el personaje que quieres ser:");
-																lblSeleccionaElColor.setBounds(341, 146, 216, 23);
-																panelInicio.add(lblSeleccionaElColor);
-																
-																		comboBox = new JComboBox();
-																		comboBox.setBounds(397, 190, 69, 21);
-																		panelInicio.add(comboBox);
-																		
-																				lblRetroalimentacion = new JLabel("");
-																				lblRetroalimentacion.setForeground(new Color(255, 0, 0));
-																				lblRetroalimentacion.setBounds(264, 353, 340, 192);
-																				panelInicio.add(lblRetroalimentacion);
-																				
-																						btnAniadirJugador = new JButton("A\u00F1adir Jugador");
-																						btnAniadirJugador.setBounds(365, 260, 148, 21);
-																						panelInicio.add(btnAniadirJugador);
-																						
-																								ImagenFicha = new JLabel("");
-																								ImagenFicha.setIcon(new ImageIcon("Imagenes/lladosbuena.png"));
-																								ImagenFicha.setBounds(567, 164, 100, 91);
-																								panelInicio.add(ImagenFicha);
 		// btnCasilla1.setVisible(false);
 
 		lblNewLabel_3 = new JLabel("");
