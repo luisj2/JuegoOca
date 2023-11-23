@@ -33,8 +33,9 @@ public class CasillaPosicion {
 	}
 	@Override
 	public String toString() {
-		return "CasillaPosicion [casilla=" + casilla + ", x=" + x + ", y=" + y + ", ocupados=" + ocupados + "]";
+		return "CasillaPosicion [x=" + x + ", y=" + y + ", ocupados=" + ocupados + "]";
 	}
+	
 	
 	
 }
