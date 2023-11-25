@@ -78,20 +78,34 @@ public class VistaOca extends JFrame {
 	public JLabel lblCasilla16;
 	public JLabel lblCasilla17;
 	public JLabel lblCasilla18_Oca;
-	private JLabel lblCasilla19_Posada;
-	private JLabel lblCasilla20;
-	private JLabel lblCasilla21;
-	private JLabel lblCasilla22;
-	private JLabel lblCasilla23_Oca;
-	private JLabel lblCasilla24;
-	private JLabel lblCasilla25;
-	private JLabel lblCasilla26_Dados;
-	private JLabel lblCasilla27_Oca;
-	private JLabel lblCasilla28;
-	private JLabel lblCasilla29;
-	private JLabel lblCasilla30;
-	private JLabel lblCasilla31_Pozo;
-	private JLabel lblCasilla32_Oca;
+	public JLabel lblCasilla19_Posada;
+	public JLabel lblCasilla20;
+	public JLabel lblCasilla21;
+	public JLabel lblCasilla22;
+	public JLabel lblCasilla23_Oca;
+	public JLabel lblCasilla24;
+	public JLabel lblCasilla25;
+	public JLabel lblCasilla26_Dados;
+	public JLabel lblCasilla27_Oca;
+	public JLabel lblCasilla28;
+	public JLabel lblCasilla29;
+	public JLabel lblCasilla30;
+	public JLabel lblCasilla31_Pozo;
+	public JLabel lblCasilla32_Oca;
+	public JLabel lblCasilla37;
+	public JLabel lblCasilla38;
+	public JLabel lblCasilla39;
+	public JLabel lblCasilla40;
+	public JLabel lblCasilla41_Oca;
+	public JLabel lblCasilla42_Laberinto;
+	public JLabel lblCasilla43;
+	private JLabel lblCasilla44;
+
+
+
+
+	
+
 
 	/**
 	 * Launch the application.
@@ -122,87 +136,6 @@ public class VistaOca extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-				panelInicio = new JPanel();
-				panelInicio.setBackground(new Color(128, 0, 255));
-				panelInicio.setBounds(0, 0, 888, 706);
-				contentPane.add(panelInicio);
-				panelInicio.setLayout(null);
-				
-						JLabel lblNewLabel = new JLabel("Introduce el nombre del jugador");
-						lblNewLabel.setBounds(292, 55, 245, 23);
-						panelInicio.add(lblNewLabel);
-						
-								textPaneNombres = new JTextPane();
-								textPaneNombres.setBounds(292, 88, 265, 19);
-								panelInicio.add(textPaneNombres);
-								
-										listaJugadores = new JList();
-										listaJugadores.setBounds(10, 59, 200, 200);
-										panelInicio.add(listaJugadores);
-										
-												JLabel lblJugadores = new JLabel("Jugadores");
-												lblJugadores.setBounds(62, 26, 134, 23);
-												panelInicio.add(lblJugadores);
-												
-														btnJugar = new JButton("");
-														btnJugar.setIcon(new ImageIcon("Imagenes/FlechaJugarBuena.png"));
-														btnJugar.setBounds(729, 567, 100, 88);
-														btnJugar.setVisible(false);
-														panelInicio.add(btnJugar);
-														
-																lblSeleccionaElColor = new JLabel("Selecciona el personaje que quieres ser:");
-																lblSeleccionaElColor.setBounds(341, 146, 216, 23);
-																panelInicio.add(lblSeleccionaElColor);
-																
-																		comboBox = new JComboBox();
-																		comboBox.setBounds(397, 190, 69, 21);
-																		panelInicio.add(comboBox);
-																		
-																				lblRetroalimentacion = new JLabel("");
-																				lblRetroalimentacion.setForeground(new Color(255, 0, 0));
-																				lblRetroalimentacion.setBounds(264, 353, 340, 192);
-																				panelInicio.add(lblRetroalimentacion);
-																				
-																						btnAniadirJugador = new JButton("A\u00F1adir Jugador");
-																						btnAniadirJugador.setBounds(365, 260, 148, 21);
-																						panelInicio.add(btnAniadirJugador);
-																						
-																								ImagenFicha = new JLabel("");
-																								ImagenFicha.setIcon(new ImageIcon("Imagenes/lladosbuena.png"));
-																								ImagenFicha.setBounds(567, 164, 100, 91);
-																								panelInicio.add(ImagenFicha);
-																								
-																								grupoButtonsDados = new ButtonGroup();
-																										radioBtn1Dado = new JRadioButton("Jugar con 1 dado");
-																										radioBtn1Dado.setBackground(new Color(128, 0, 255));
-																										radioBtn1Dado.setBounds(302, 333, 125, 21);
-																										panelInicio.add(radioBtn1Dado);
-																										
-																												radioBtn2Dado = new JRadioButton("Jugar con 2 dados");
-																												radioBtn2Dado.setBackground(new Color(128, 0, 255));
-																												radioBtn2Dado.setBounds(501, 333, 140, 21);
-																												panelInicio.add(radioBtn2Dado);
-																												grupoButtonsDados.add(radioBtn2Dado);
-																												grupoButtonsDados.add(radioBtn1Dado);
-		
-				panelDados = new JPanel();
-				panelDados.setBounds(691, 10, 187, 246);
-				contentPane.add(panelDados);
-				panelDados.setLayout(null);
-				panelDados.setVisible(false);
-				
-						lblDado1 = new JLabel("");
-						lblDado1.setBounds(10, 24, 84, 106);
-						panelDados.add(lblDado1);
-						
-								lblDado2 = new JLabel("");
-								lblDado2.setBounds(103, 24, 84, 106);
-								panelDados.add(lblDado2);
-								
-										btnTirarDados = new JButton("Tirar dados");
-										btnTirarDados.setBounds(25, 189, 152, 21);
-										panelDados.add(btnTirarDados);
 
 		panelPrincipal = new JPanel();
 		panelPrincipal.setBounds(0, 0, 888, 740);
@@ -281,6 +214,12 @@ public class VistaOca extends JFrame {
 		lblCasilla9_Oca.setBackground(Color.BLUE);
 		lblCasilla9_Oca.setBounds(501, 612, 56, 74);
 		panelJuego.add(lblCasilla9_Oca);
+		
+		lblCasilla44 = new JLabel("");
+		lblCasilla44.setOpaque(true);
+		lblCasilla44.setBackground(new Color(128, 128, 255));
+		lblCasilla44.setBounds(501, 538, 95, 74);
+		panelJuego.add(lblCasilla44);
 
 		JLabel lblCasilla10 = new JLabel("");
 		lblCasilla10.setOpaque(true);
@@ -447,10 +386,132 @@ public class VistaOca extends JFrame {
 		lblCasilla36_Oca.setBackground(new Color(0, 0, 255));
 		lblCasilla36_Oca.setBounds(0, 504, 115, 108);
 		panelJuego.add(lblCasilla36_Oca);
+		
+		lblCasilla37 = new JLabel("");
+		lblCasilla37.setOpaque(true);
+		lblCasilla37.setBackground(new Color(0, 128, 0));
+		lblCasilla37.setBounds(113, 538, 56, 74);
+		panelJuego.add(lblCasilla37);
+		
+		lblCasilla38 = new JLabel("");
+		lblCasilla38.setOpaque(true);
+		lblCasilla38.setBackground(new Color(0, 255, 64));
+		lblCasilla38.setBounds(169, 538, 56, 74);
+		panelJuego.add(lblCasilla38);
+		
+		lblCasilla39 = new JLabel("");
+		lblCasilla39.setOpaque(true);
+		lblCasilla39.setBackground(new Color(0, 128, 0));
+		lblCasilla39.setBounds(224, 538, 56, 74);
+		panelJuego.add(lblCasilla39);
+		
+		lblCasilla40 = new JLabel("");
+		lblCasilla40.setOpaque(true);
+		lblCasilla40.setBackground(new Color(0, 255, 64));
+		lblCasilla40.setBounds(280, 538, 56, 74);
+		panelJuego.add(lblCasilla40);
+		
+		lblCasilla41_Oca = new JLabel("");
+		lblCasilla41_Oca.setOpaque(true);
+		lblCasilla41_Oca.setBackground(Color.BLUE);
+		lblCasilla41_Oca.setBounds(335, 538, 56, 74);
+		panelJuego.add(lblCasilla41_Oca);
+		
+		lblCasilla42_Laberinto = new JLabel("");
+		lblCasilla42_Laberinto.setOpaque(true);
+		lblCasilla42_Laberinto.setBackground(new Color(255, 0, 255));
+		lblCasilla42_Laberinto.setBounds(390, 538, 56, 74);
+		panelJuego.add(lblCasilla42_Laberinto);
+		
+		lblCasilla43 = new JLabel("");
+		lblCasilla43.setOpaque(true);
+		lblCasilla43.setBackground(new Color(0, 255, 64));
+		lblCasilla43.setBounds(446, 538, 56, 74);
+		panelJuego.add(lblCasilla43);
 
 		lblRetroalimentacionJuego = new JLabel("");
 		lblRetroalimentacionJuego.setBounds(691, 293, 187, 269);
 		panelPrincipal.add(lblRetroalimentacionJuego);
+
+		panelInicio = new JPanel();
+		panelInicio.setBackground(new Color(128, 0, 255));
+		panelInicio.setBounds(0, 0, 888, 706);
+		contentPane.add(panelInicio);
+		panelInicio.setLayout(null);
+
+		JLabel lblNewLabel = new JLabel("Introduce el nombre del jugador");
+		lblNewLabel.setBounds(292, 55, 245, 23);
+		panelInicio.add(lblNewLabel);
+
+		textPaneNombres = new JTextPane();
+		textPaneNombres.setBounds(292, 88, 265, 19);
+		panelInicio.add(textPaneNombres);
+
+		listaJugadores = new JList();
+		listaJugadores.setBounds(10, 59, 200, 200);
+		panelInicio.add(listaJugadores);
+
+		JLabel lblJugadores = new JLabel("Jugadores");
+		lblJugadores.setBounds(62, 26, 134, 23);
+		panelInicio.add(lblJugadores);
+
+		btnJugar = new JButton("");
+		btnJugar.setIcon(new ImageIcon("Imagenes/FlechaJugarBuena.png"));
+		btnJugar.setBounds(729, 567, 100, 88);
+		btnJugar.setVisible(false);
+		panelInicio.add(btnJugar);
+
+		lblSeleccionaElColor = new JLabel("Selecciona el personaje que quieres ser:");
+		lblSeleccionaElColor.setBounds(341, 146, 216, 23);
+		panelInicio.add(lblSeleccionaElColor);
+
+		comboBox = new JComboBox();
+		comboBox.setBounds(397, 190, 69, 21);
+		panelInicio.add(comboBox);
+
+		lblRetroalimentacion = new JLabel("");
+		lblRetroalimentacion.setForeground(new Color(255, 0, 0));
+		lblRetroalimentacion.setBounds(264, 353, 340, 192);
+		panelInicio.add(lblRetroalimentacion);
+
+		btnAniadirJugador = new JButton("A\u00F1adir Jugador");
+		btnAniadirJugador.setBounds(365, 260, 148, 21);
+		panelInicio.add(btnAniadirJugador);
+
+		ImagenFicha = new JLabel("");
+		ImagenFicha.setIcon(new ImageIcon("Imagenes/lladosbuena.png"));
+		ImagenFicha.setBounds(567, 164, 100, 91);
+		panelInicio.add(ImagenFicha);
+
+		radioBtn1Dado = new JRadioButton("Jugar con 1 dado");
+		radioBtn1Dado.setBackground(new Color(128, 0, 255));
+		radioBtn1Dado.setBounds(302, 333, 125, 21);
+		panelInicio.add(radioBtn1Dado);
+
+		radioBtn2Dado = new JRadioButton("Jugar con 2 dados");
+		radioBtn2Dado.setBackground(new Color(128, 0, 255));
+		radioBtn2Dado.setBounds(501, 333, 140, 21);
+		panelInicio.add(radioBtn2Dado);
+		grupoButtonsDados.add(radioBtn2Dado);
+		grupoButtonsDados.add(radioBtn1Dado);
+
+		panelDados = new JPanel();
+		panelDados.setBounds(691, 10, 187, 246);
+		contentPane.add(panelDados);
+		panelDados.setLayout(null);
+		panelDados.setVisible(false);
+
+		lblDado1 = new JLabel("");
+		lblDado1.setBounds(10, 24, 84, 106);
+		panelDados.add(lblDado1);
+
+		lblDado2 = new JLabel("");
+		lblDado2.setBounds(103, 24, 84, 106);
+		panelDados.add(lblDado2);
+
+		btnTirarDados = new JButton("Tirar dados");
+		btnTirarDados.setBounds(25, 189, 152, 21);
+		panelDados.add(btnTirarDados);
 
 		grupoButtonsDados = new ButtonGroup();
 		// btnCasilla1.setVisible(false);
