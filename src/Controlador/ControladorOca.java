@@ -30,14 +30,13 @@ public class ControladorOca implements ActionListener {
 
 	VistaOca vista = new VistaOca();
 	DefaultListModel modelo = new DefaultListModel<>();
-	ArrayList<String> jugadorestr = new ArrayList<>();
 	ArrayList<Jugador> jugadores = new ArrayList<>();
 	ArrayList<Pregunta> preguntas = rellenarPreguntasLlados();
 	Pregunta pregunta = new Pregunta();
 	int turno;
 	boolean modTurno;
 	//VARIABLE QUE HACE EL CAMBIO DE LA Y DE UNA FICHA Y OTRA PARA QUE NO ESTEN JUNTAS
-	static final int YCAMBIO = 39;
+	static final int XYCAMBIO = 39;
 	
 	//VARIABLES DE POSICIONES INICIALES
 	static final int XINICLLADOS = 78;
@@ -47,6 +46,10 @@ public class ControladorOca implements ActionListener {
 	Map <Integer,Integer> getOcas = rellenarOcas();
 	//REGISTRAR LA X Y LA Y DE CADA CASLILLA DEL TABLERO
 	Map <Integer,CasillaPosicion> posiciones = rellenarPosiciones();
+	boolean cambiarCasilla;
+	boolean personaPozo;
+	boolean personaCarcel;
+	boolean juegoCon2Dados;
 
 	
 	
@@ -54,6 +57,7 @@ public class ControladorOca implements ActionListener {
 	//contructor
 	public ControladorOca(VistaOca frame) {
 		this.vista = frame;
+		//
 		this.vista.btnAniadirJugador.addActionListener(this);
 		this.vista.btnJugar.addActionListener(this);
 		this.vista.btnTirarDados.addActionListener(this);
@@ -64,10 +68,15 @@ public class ControladorOca implements ActionListener {
 		this.vista.radiobtnRespuesta3.addActionListener(this);
 		this.vista.btnMostrarPregunta.addActionListener(this);
 		this.vista.btnResponder.addActionListener(this);
-		this.vista.btnImprimir.addActionListener(this);
 		*/
+		this.vista.radioBtn1Dado.addActionListener(this);
+		this.vista.radioBtn2Dado.addActionListener(this);
+		//LOS MUEVO LAS FICHAS A SUS SITIOS INICIALES
 		vista.lblFichaLlados.setLocation(XINICLLADOS,YINICIAL);
 		vista.lblFichaXokas.setLocation(XINICXOKAS,YINICIAL);
+		
+		personaPozo = false;
+		personaCarcel = false;
 		
 		
 	}
@@ -111,15 +120,10 @@ public class ControladorOca implements ActionListener {
 		}
 		*/
 		
-		/*
-		if(e.getSource() == vista.btnImprimir) {
-			
-			
-			
-			
-		}
+		
 		
 		//mostrar una pregunta aleatoria del arraylist de Pregunta
+		/*
 		if (e.getSource() == vista.btnMostrarPregunta) {
 			
 			int preguntaRandom = (int) (Math.random() * preguntas.size());
@@ -191,13 +195,20 @@ public class ControladorOca implements ActionListener {
 					vista.panelPrincipal.setVisible(true);
 					//vista.radiobtnRespuesta2.setSelected(false);
 				}
-			}
+			}	
 			vista.radiobtnRespuesta2.setSelected(false);
 
 		}
+		*/
 
-*/
 		//toda la funcionalidad de elegir un personaje
+		if(e.getSource() == vista.radioBtn1Dado) {
+			juegoCon2Dados = false;
+			vista.lblDado2.setVisible(false);
+		}
+		if(e.getSource() == vista.radioBtn2Dado) {
+			juegoCon2Dados = true;
+		}
 		if (e.getSource() == vista.btnAniadirJugador) {
 			vista.lblRetroalimentacion.setText("");
 			String nombre = vista.textPaneNombres.getText().toString(); //convierto a String el nombre que introduce el usuario
@@ -223,11 +234,9 @@ public class ControladorOca implements ActionListener {
 					//te deja registrarte como jugador siempre que no haya 4 jugadores
 					if (jugadores.size() <= 4) {
 						Jugador jugador = new Jugador();
-						jugadorestr.add(nombre);
 
 						jugador.setNombre(nombre);
 						jugador.setPersonaje(personaje);
-						aniadirLblFichas(jugador);
 						
 						
 						jugador.setActivo(true);
@@ -288,7 +297,7 @@ public class ControladorOca implements ActionListener {
 
 		//button de jugar para que me cambie de panel inicio al panel principal que es donde vamos a jugar
 		if (e.getSource() == vista.btnJugar) {
-			if (jugadores.size() >= 2 && jugadores.size() <= 4) {
+			if (jugadores.size() >= 2 && jugadores.size() <= 4 && (vista.radioBtn1Dado.isSelected() || vista.radioBtn2Dado.isSelected())) {
 				repartirFichas(jugadores, vista);
 
 				vista.panelInicio.setVisible(false);
@@ -301,11 +310,16 @@ public class ControladorOca implements ActionListener {
 
 			} else {
 				vista.lblRetroalimentacion.setText("");
-				vista.lblRetroalimentacion.setText("Se necesitan al menos 2 jugadores");
-			}
+				vista.lblRetroalimentacion.setText("Se necesitan al menos 2 jugadores y alguno de los botones de los dados activados");
+				  
+		}
+			
 		}
 		//toda la funcionalidad de tirar los dados y de mover la ficha
 		if (e.getSource() == vista.btnTirarDados) {
+			
+
+			cambiarCasilla = true;
 			//rellenarCasillas(vista);
 			//System.out.println("El turno es "+turno);
 			
@@ -323,8 +337,11 @@ public class ControladorOca implements ActionListener {
 			HACE UN GET DE TURNOS RESTANTES, QUE AUMENTARA SI SE QUEDA EN LA CARCEL POR EJEMPLO
 			Y ESTA ACTIVO ES DECIR QUE NO HA LLEGADO A LA CASILLA FINAL Y HA DEJADO DE JUGAR
 			*/
+			
 				if(jugadores.get(turno).getTurnosRestantes() == 0 && jugadores.get(turno).isActivo()) {
 					int totalDados =0;
+				if(juegoCon2Dados) {
+					System.out.println("Juego con 2 dados");
 					if(jugadores.get(turno).getCasilla()>=60) {
 						vista.lblDado2.setVisible(false);
 						totalDados = tirarDados(vista,false); 
@@ -333,7 +350,13 @@ public class ControladorOca implements ActionListener {
 						vista.lblDado2.setVisible(true);
 						totalDados = tirarDados(vista,true);
 						
+						
 					}
+				}else {
+					totalDados = tirarDados(vista,false);
+					System.out.println("Juego con 1 dado");
+				}
+					
 					
 					
 					//vista.lblRetroalimentacion.setText("");
@@ -344,7 +367,7 @@ public class ControladorOca implements ActionListener {
 					int posicionAntigua = jugadores.get(turno).getCasilla();
 					System.out.println("Casilla antigua "+posicionAntigua);
 					System.out.println("Casilla actu "+casillaMovimiento);
-					
+				 
 					
 					System.out.println("Personaje "+jugadores.get(turno).getPersonaje());
 					
@@ -356,7 +379,14 @@ public class ControladorOca implements ActionListener {
 						//PD:No me acuerdo por que le paso 2 iguales
 						vista.lblRetroalimentacionJuego.setText("antigua:" +posicionAntigua+" nueva:" +casillaMovimiento);
 						actualizarPosicion(jugadores.get(turno),casillaMovimiento);
-						jugadores.get(turno).setCasilla(casillaMovimiento);
+						System.out.println("Antes de actualizar la variable es:"+casillaMovimiento);
+					
+						if(cambiarCasilla) {
+							jugadores.get(turno).setCasilla(casillaMovimiento);
+						}
+							
+						
+						
 						//actualizamos los turnos
 						if(turno == 1 && modTurno) {
 							turno = 0;
@@ -379,6 +409,7 @@ public class ControladorOca implements ActionListener {
 
 					
 				}
+		
 				}
 				
 			
@@ -387,19 +418,12 @@ public class ControladorOca implements ActionListener {
 
 	
 	//agregar al objeto jugador el label de la ficha que le corresponde
-	public void aniadirLblFichas(Jugador jugador) {
-		if(jugador.getPersonaje().equalsIgnoreCase("llados")) {
-			jugador.setLable(vista.lblFichaLlados);
-		}else if(jugador.getPersonaje().equalsIgnoreCase("xokas")) {
-			jugador.setLable(vista.lblFichaXokas);
-		}
-		
-	}
+	
 
 	//actualizar las posicion de la ficha segun lo que le ha salido en los dados
 	public void actualizarPosicion(Jugador jugador, int posicionNueva) {
 	    
-		ActualizarFicha(posicionNueva,jugador);
+		ActualizarFicha(posicionNueva,jugador,true);
 	
 		
 		
@@ -413,84 +437,190 @@ public class ControladorOca implements ActionListener {
 
 	//METODO PARA CAMBIAR LA POSICION DE LA FICHA EN FUNCION DEL NUMERO QUE HAYA EN LA VARIABLE CASILLAACTUALIZAR
 	//Y CONTROLAR LAS OCAS
-	private void ActualizarFicha(int casillaActualizar,Jugador jugador) {
+	private void ActualizarFicha(int casillaActualizar,Jugador jugador,boolean repetirOca) {
+		cambiarCasilla = true;
 		
-		boolean repetir = false;
-		int contador =0;
-		
-		do {
-			repetir = false;
-			CasillaPosicion posicion= posiciones.get(casillaActualizar);
-			switch (casillaActualizar) {
-			case 1:
-				if(jugador.getPersonaje().equals("Llados")) {
-					vista.lblFichaLlados.setLocation(XINICLLADOS,YINICIAL);
-					
-				}else if(jugador.getPersonaje().equals("elxokas")){
-					vista.lblFichaXokas.setLocation(XINICXOKAS,YINICIAL);
-				
-				}
-				break;
-			case 2:
-				if(jugador.getPersonaje().equals("Llados")) {
-					vista.lblFichaLlados.setLocation(posicion.getX(),posicion.getY());
-					
-				}else if(jugador.getPersonaje().equals("elxokas")){
-					vista.lblFichaXokas.setLocation(posicion.getX(),posicion.getY()+YCAMBIO);
-				
-				}
-				break;
-			case 3:
-				if(jugador.getPersonaje().equals("Llados")) {
-					vista.lblFichaLlados.setLocation(posicion.getX(),posicion.getY());
-					
-				}else if(jugador.getPersonaje().equals("elxokas")){
-					vista.lblFichaXokas.setLocation(posicion.getX(),posicion.getY()+YCAMBIO);
-				
-				}
-			case 4:
-				if(jugador.getPersonaje().equals("Llados")) {
-					vista.lblFichaLlados.setLocation(posicion.getX(),posicion.getY());
-					
-				}else if(jugador.getPersonaje().equals("elxokas")){
-					vista.lblFichaXokas.setLocation(posicion.getX(),posicion.getY()+YCAMBIO);
-				
-				}
-				break;
-			case 5:
-				if(jugador.getPersonaje().equals("Llados")) {
-					vista.lblFichaLlados.setLocation(posicion.getX(),posicion.getY());
-					
-				}else if(jugador.getPersonaje().equals("elxokas")){
-					vista.lblFichaXokas.setLocation(posicion.getX(),posicion.getY()+YCAMBIO);
-				
-				}
-				break;
-				
-
-			default:
-				System.out.println("no es ninguno del switch");
-				break;
+			if(casillaActualizar >63) {
+				casillaActualizar -= (casillaActualizar-63);
 			}
+			CasillaPosicion posicion= posiciones.get(casillaActualizar);
+			
+			mueveFicha(casillaActualizar,posicion,jugador);
+			
+			if(casillaActualizar == 63) {
+				System.out.println("El ganador es "+jugador.getNombre());
+			}
+			
+			//Casilla inicial
+			
+			 vista.lblFichaLlados.revalidate();
+		     vista.lblFichaLlados.repaint();
+		     
+		     vista.lblFichaXokas.revalidate();
+		     vista.lblFichaXokas.repaint();
+
+	
+				
+			
 					//Compruebo si ha habido Oca
-					if(getOcas.get(casillaActualizar) != null && contador == 0) {
+					if(getOcas.get(casillaActualizar) != null && repetirOca) {
+						
 						casillaActualizar = getOcas.get(casillaActualizar);
-						repetir = true;
 						modTurno = false;
 						System.out.println("De oca a oca y tiras porque te toca \n"+jugador.getNombre()+" avanza hasta la casilla "+casillaActualizar);
-						contador++;
+						ActualizarFicha(casillaActualizar, jugador,false);
+						System.out.println("El numero de casillaActualizar en el metodo Actualizar es:"+casillaActualizar);
+						jugadores.get(turno).setCasilla(casillaActualizar);
+						cambiarCasilla = false;
+					
 						try {
 							Thread.sleep(2000);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
+						
+						
 					}
-		} while (repetir);
+					//Puentes
+					if(casillaActualizar ==6) {
+						casillaActualizar = 12;
+						posicion = posiciones.get(casillaActualizar);
+						mueveFicha(casillaActualizar, posicion, jugador);
+						cambiarCasilla = false;
+						jugadores.get(turno).setCasilla(casillaActualizar);
+						System.out.println("De puente a puente \n el jugador"+jugador.getNombre()+" avanza hasta la casilla 12");
+								
+					}else if(casillaActualizar == 12) {
+						
+						casillaActualizar = 19;
+						
+						
+						
+						
+						
+						
+					}
+					if(casillaActualizar == 19) {
+						System.out.println("Avanzas hasta la posada pero pierdes el turno");
+						cambiarCasilla = false;
+						posicion = posiciones.get(casillaActualizar);
+						mueveFicha(casillaActualizar, posicion, jugador);
+						jugadores.get(turno).setCasilla(casillaActualizar);
+						jugadores.get(turno).setTurnosRestantes(jugadores.get(turno).getTurnosRestantes()+1);
+						
+					}
+					//Dados de la casilla 26
+					if(casillaActualizar == 26) {
+						System.out.println("El jugador avanza hasta la casilla 53");
+						casillaActualizar = 53;
+						cambiarCasilla = false;
+						posicion = posiciones.get(casillaActualizar);
+						jugadores.get(turno).setCasilla(casillaActualizar);
+						mueveFicha(casillaActualizar, posicion, jugador);
+					}
+					//Pozo
+					if(casillaActualizar == 31) {
+						if(!personaPozo) {
+							personaPozo = true;
+							jugadores.get(turno).setActivo(false);
+							System.out.println("El jugador "+jugador.getNombre()+" se ha quedado encerrado en el pozo, saldra cuando caiga otro jugador");
+						}else {
+							for (Jugador tmpJugador : jugadores) {
+								tmpJugador.setActivo(true);
+							}
+							System.out.println("No hay nadie encerrado en el pozo ahora");
+							personaPozo = false;
+						}
+						
+						
+					}
+					
+					if(casillaActualizar == 42) {
+						casillaActualizar = 30;
+						cambiarCasilla = false;
+						jugadores.get(turno).setCasilla(casillaActualizar);
+						posicion = posiciones.get(casillaActualizar);
+						mueveFicha(casillaActualizar, posicion, jugador);
+					}
+					
+					if(casillaActualizar == 53) {
+						System.out.println("El jugador retrocede a la casilla 26");
+						casillaActualizar = 26;
+						cambiarCasilla = false;
+						posicion = posiciones.get(casillaActualizar);
+						jugadores.get(turno).setCasilla(casillaActualizar);
+						mueveFicha(casillaActualizar, posicion, jugador);
+					}
+					if(casillaActualizar == 56) {
+						if(!personaCarcel) {
+							personaCarcel = true;
+							jugadores.get(turno).setActivo(false);
+							System.out.println("El jugador "+jugador.getNombre()+" se ha quedado encerrado en el pozo, saldra cuando caiga otro jugador");
+						}else {
+							for (Jugador tmpJugador : jugadores) {
+								tmpJugador.setActivo(true);
+							}
+							System.out.println("No hay nadie encerrado en la carcel ahora");
+							personaPozo = false;
+						}
+					}
+					if(casillaActualizar == 58) {
+						cambiarCasilla = false;
+						jugadores.get(turno).setCasilla(1);
+						mueveFicha(1, null, jugador);
+						
+					}
+					
+					 
+	
 		
 		
 
 	}
 	
+	//Movimiento de la ficha
+	
+	private void mueveFicha(int casillaActualizar,CasillaPosicion posicion, Jugador jugador) {
+		if (casillaActualizar == 1) {
+		    if (jugador.getPersonaje().equals("Llados")) {
+		        vista.lblFichaLlados.setLocation(XINICLLADOS, YINICIAL);
+		    } else if (jugador.getPersonaje().equals("elxokas")) {
+		        vista.lblFichaXokas.setLocation(XINICXOKAS, YINICIAL);
+		    }
+		    //Casillas hacia arriba
+		} else if (casillaActualizar >= 2 && casillaActualizar <=10 || casillaActualizar>=19 && casillaActualizar<=28) {
+		    if (jugador.getPersonaje().equals("Llados")) {
+		        vista.lblFichaLlados.setLocation(posicion.getX(), posicion.getY());
+		        
+		    } else if (jugador.getPersonaje().equals("elxokas")) {
+		        vista.lblFichaXokas.setLocation(posicion.getX(), posicion.getY() + XYCAMBIO);
+		    }
+		   
+		    //casilla hacia el lado
+		} else if(casillaActualizar >= 11 && casillaActualizar<=18 || casillaActualizar>=29 && casillaActualizar<=35){
+			 if (jugador.getPersonaje().equals("Llados")) {
+			        vista.lblFichaLlados.setLocation(posicion.getX(), posicion.getY());
+			    } else if (jugador.getPersonaje().equals("elxokas")) {
+			        vista.lblFichaXokas.setLocation(posicion.getX()+XYCAMBIO, posicion.getY());
+			    }
+		}
+		 vista.lblFichaLlados.revalidate();
+	     vista.lblFichaLlados.repaint();
+	     
+	     vista.lblFichaXokas.revalidate();
+	     vista.lblFichaXokas.repaint();
+	
+		
+	}
+
+
+
+
+
+ 
+
+
+
 	//RELLENO UN HASHMAP CON KEY=CASILLA,VALUE=X E Y DE LA CASILLA
 	public Map<Integer,CasillaPosicion> rellenarPosiciones() {
 		Map <Integer,CasillaPosicion> posiciones = new HashMap<>();
@@ -499,6 +629,40 @@ public class ControladorOca implements ActionListener {
 		posiciones.put(3, new CasillaPosicion(188,611));
 		posiciones.put(4, new CasillaPosicion(235,612));
 		posiciones.put(5, new CasillaPosicion(287,612));
+		posiciones.put(6, new CasillaPosicion(354,611));
+		posiciones.put(7, new CasillaPosicion(410,612));
+		posiciones.put(8, new CasillaPosicion(465,611));
+		posiciones.put(9, new CasillaPosicion(512,614));
+		posiciones.put(10, new CasillaPosicion(618,580));
+		posiciones.put(11, new CasillaPosicion(607,525));
+		posiciones.put(12, new CasillaPosicion(607,469));
+		posiciones.put(13, new CasillaPosicion(607,410));
+		posiciones.put(14, new CasillaPosicion(607,354));
+		posiciones.put(15, new CasillaPosicion(607,299));
+		posiciones.put(16, new CasillaPosicion(607,243));
+		posiciones.put(17, new CasillaPosicion(607,178));
+		posiciones.put(18, new CasillaPosicion(607,131));
+		posiciones.put(19, new CasillaPosicion(607,0));
+		posiciones.put(20, new CasillaPosicion(512,0));
+		posiciones.put(21, new CasillaPosicion(456,0));
+		posiciones.put(22, new CasillaPosicion(401,0));
+		posiciones.put(23, new CasillaPosicion(346,0));
+		posiciones.put(24, new CasillaPosicion(290,0));
+		posiciones.put(25, new CasillaPosicion(235,0));
+		posiciones.put(26, new CasillaPosicion(179,0));
+		posiciones.put(27, new CasillaPosicion(125,0));
+		posiciones.put(28, new CasillaPosicion(42,0));
+		posiciones.put(29, new CasillaPosicion(10,123));
+		posiciones.put(30, new CasillaPosicion(10,179));
+		posiciones.put(31, new CasillaPosicion(10,234));
+		posiciones.put(32, new CasillaPosicion(10,290));
+		posiciones.put(33, new CasillaPosicion(10,346));
+		posiciones.put(34, new CasillaPosicion(10,403));
+		posiciones.put(35, new CasillaPosicion(10,459));
+		posiciones.put(36, new CasillaPosicion(42,504));
+		
+		
+		
 	
 		
 		
@@ -507,6 +671,7 @@ public class ControladorOca implements ActionListener {
 		return posiciones;
 	}
 
+	
 
 
 
@@ -521,20 +686,28 @@ public class ControladorOca implements ActionListener {
 	
 	public int tirarDados(VistaOca vista,boolean dosDados) {
 
-		/*
+	
+		
 		int dado1 = (int) (1 + Math.random() * 6);
 		int dado2 = (int) (1 + Math.random() * 6);
-		*/
-		int dado1 = 1;
-		int dado2 = 2;
+		
+		
+		
+		dado1 = 6;
+		dado2 = 5;
+	
+		
 		cambiarImagenes(vista, dado1, 1);
-		if(dosDados) {
+		if(dosDados && juegoCon2Dados) {
 			cambiarImagenes(vista, dado2, 2);
 			return dado1+dado2;
 			
-		}else {
+		}else if(!dosDados || !juegoCon2Dados){
 			return dado1;
+		}else {
+			return 0;
 		}
+	
 		
 		
 
@@ -544,6 +717,8 @@ public class ControladorOca implements ActionListener {
 		
 
 	}
+	
+	
 
 	//cambiar la imagen del dado segun el numero que salga y el dado que se pretenda de cambiar
 	public void cambiarImagenes(VistaOca vista, int dadoRandom, int cualDado) {
@@ -596,6 +771,8 @@ public class ControladorOca implements ActionListener {
 			}
 
 			break;
+			default:
+			break;
 
 		}
 	}
@@ -630,6 +807,23 @@ public class ControladorOca implements ActionListener {
 			vista.ImagenFicha.setIcon(new ImageIcon("Imagenes/xokasBuena.png"));
 			sonido.open(AudioSystem.getAudioInputStream(new File("audios/noesunjuego.wav")));
 			sonido.start();
+		}
+
+	}
+	public void frasesDerrotaLlados(String personaje)
+			throws LineUnavailableException, IOException, UnsupportedAudioFileException {
+		int random = (int) (1+Math.random() * 3);
+		Clip sonido = AudioSystem.getClip();
+
+		if (personaje.equalsIgnoreCase("llados")) { //sonido llados
+			if(random == 1){
+				sonido.open(AudioSystem.getAudioInputStream(new File("audios/escomofuck.wav")));
+			}else if(random == 2) {
+				sonido.open(AudioSystem.getAudioInputStream(new File("audios/nopuedoduraraqui.wav")));
+			}else {
+				
+			}
+		sonido.start();
 		}
 
 	}
