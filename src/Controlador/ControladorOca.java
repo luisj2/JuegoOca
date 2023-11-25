@@ -57,6 +57,7 @@ public class ControladorOca implements ActionListener {
 		this.vista.btnAniadirJugador.addActionListener(this);
 		this.vista.btnJugar.addActionListener(this);
 		this.vista.btnTirarDados.addActionListener(this);
+		/*
 		this.vista.btnMostrarPregunta.addActionListener(this);
 		this.vista.radiobtnRespuesta1.addActionListener(this);
 		this.vista.radiobtnRespuesta2.addActionListener(this);
@@ -64,6 +65,7 @@ public class ControladorOca implements ActionListener {
 		this.vista.btnMostrarPregunta.addActionListener(this);
 		this.vista.btnResponder.addActionListener(this);
 		this.vista.btnImprimir.addActionListener(this);
+		*/
 		vista.lblFichaLlados.setLocation(XINICLLADOS,YINICIAL);
 		vista.lblFichaXokas.setLocation(XINICXOKAS,YINICIAL);
 		
@@ -109,6 +111,7 @@ public class ControladorOca implements ActionListener {
 		}
 		*/
 		
+		/*
 		if(e.getSource() == vista.btnImprimir) {
 			
 			
@@ -193,6 +196,7 @@ public class ControladorOca implements ActionListener {
 
 		}
 
+*/
 		//toda la funcionalidad de elegir un personaje
 		if (e.getSource() == vista.btnAniadirJugador) {
 			vista.lblRetroalimentacion.setText("");
