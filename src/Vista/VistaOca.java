@@ -173,6 +173,7 @@ public class VistaOca extends JFrame {
 																								ImagenFicha.setBounds(567, 164, 100, 91);
 																								panelInicio.add(ImagenFicha);
 																								
+																								grupoButtonsDados = new ButtonGroup();
 																										radioBtn1Dado = new JRadioButton("Jugar con 1 dado");
 																										radioBtn1Dado.setBackground(new Color(128, 0, 255));
 																										radioBtn1Dado.setBounds(302, 333, 125, 21);
