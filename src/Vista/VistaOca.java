@@ -100,12 +100,24 @@ public class VistaOca extends JFrame {
 	public JLabel lblCasilla42_Laberinto;
 	public JLabel lblCasilla43;
 	private JLabel lblCasilla44;
-
-
-
-
-	
-
+	private JLabel lblCasilla45_Oca;
+	private JLabel lblCasilla46;
+	private JLabel lblCasilla47;
+	private JLabel lblCasilla48;
+	private JLabel lblCasilla49;
+	private JLabel lblCasilla50_Oca;
+	private JLabel lblCasilla51;
+	private JLabel lblCasilla52;
+	private JLabel lblCasilla53_Dados;
+	private JLabel lblCasilla54Oca;
+	private JLabel lblCasilla55;
+	private JLabel lblCasilla56;
+	private JLabel lblCasilla57;
+	private JLabel lblCasilla58;
+	private JLabel lblCasilla59_Oca;
+	private JLabel lblCasilla60;
+	private JLabel lblCasilla61;
+	private JLabel lblCasilla39_1;
 
 	/**
 	 * Launch the application.
@@ -214,11 +226,11 @@ public class VistaOca extends JFrame {
 		lblCasilla9_Oca.setBackground(Color.BLUE);
 		lblCasilla9_Oca.setBounds(501, 612, 56, 74);
 		panelJuego.add(lblCasilla9_Oca);
-		
+
 		lblCasilla44 = new JLabel("");
 		lblCasilla44.setOpaque(true);
 		lblCasilla44.setBackground(new Color(128, 128, 255));
-		lblCasilla44.setBounds(501, 538, 95, 74);
+		lblCasilla44.setBounds(501, 504, 95, 107);
 		panelJuego.add(lblCasilla44);
 
 		JLabel lblCasilla10 = new JLabel("");
@@ -228,7 +240,7 @@ public class VistaOca extends JFrame {
 		panelJuego.add(lblCasilla10);
 
 		btnMostrarPregunta = new JButton("Mostrar pregunta");
-		btnMostrarPregunta.setBounds(169, 154, 142, 21);
+		btnMostrarPregunta.setBounds(189, 453, 142, 21);
 		panelJuego.add(btnMostrarPregunta);
 
 		lblCasilla11 = new JLabel("");
@@ -278,6 +290,12 @@ public class VistaOca extends JFrame {
 		lblCasilla18_Oca.setBackground(new Color(0, 0, 255));
 		lblCasilla18_Oca.setBounds(597, 112, 74, 56);
 		panelJuego.add(lblCasilla18_Oca);
+		
+		lblCasilla51 = new JLabel("");
+		lblCasilla51.setOpaque(true);
+		lblCasilla51.setBackground(Color.GREEN);
+		lblCasilla51.setBounds(466, 71, 130, 108);
+		panelJuego.add(lblCasilla51);
 
 		lblCasilla19_Posada = new JLabel("");
 		lblCasilla19_Posada.setOpaque(true);
@@ -386,48 +404,150 @@ public class VistaOca extends JFrame {
 		lblCasilla36_Oca.setBackground(new Color(0, 0, 255));
 		lblCasilla36_Oca.setBounds(0, 504, 115, 108);
 		panelJuego.add(lblCasilla36_Oca);
-		
+
 		lblCasilla37 = new JLabel("");
 		lblCasilla37.setOpaque(true);
 		lblCasilla37.setBackground(new Color(0, 128, 0));
 		lblCasilla37.setBounds(113, 538, 56, 74);
 		panelJuego.add(lblCasilla37);
-		
+
 		lblCasilla38 = new JLabel("");
 		lblCasilla38.setOpaque(true);
 		lblCasilla38.setBackground(new Color(0, 255, 64));
 		lblCasilla38.setBounds(169, 538, 56, 74);
 		panelJuego.add(lblCasilla38);
-		
+
 		lblCasilla39 = new JLabel("");
 		lblCasilla39.setOpaque(true);
 		lblCasilla39.setBackground(new Color(0, 128, 0));
 		lblCasilla39.setBounds(224, 538, 56, 74);
 		panelJuego.add(lblCasilla39);
-		
+
 		lblCasilla40 = new JLabel("");
 		lblCasilla40.setOpaque(true);
 		lblCasilla40.setBackground(new Color(0, 255, 64));
 		lblCasilla40.setBounds(280, 538, 56, 74);
 		panelJuego.add(lblCasilla40);
-		
+
 		lblCasilla41_Oca = new JLabel("");
 		lblCasilla41_Oca.setOpaque(true);
 		lblCasilla41_Oca.setBackground(Color.BLUE);
 		lblCasilla41_Oca.setBounds(335, 538, 56, 74);
 		panelJuego.add(lblCasilla41_Oca);
-		
+
 		lblCasilla42_Laberinto = new JLabel("");
 		lblCasilla42_Laberinto.setOpaque(true);
 		lblCasilla42_Laberinto.setBackground(new Color(255, 0, 255));
 		lblCasilla42_Laberinto.setBounds(390, 538, 56, 74);
 		panelJuego.add(lblCasilla42_Laberinto);
-		
+
 		lblCasilla43 = new JLabel("");
 		lblCasilla43.setOpaque(true);
 		lblCasilla43.setBackground(new Color(0, 255, 64));
 		lblCasilla43.setBounds(446, 538, 56, 74);
 		panelJuego.add(lblCasilla43);
+		
+		lblCasilla45_Oca = new JLabel("");
+		lblCasilla45_Oca.setOpaque(true);
+		lblCasilla45_Oca.setBackground(Color.BLUE);
+		lblCasilla45_Oca.setBounds(522, 454, 74, 56);
+		panelJuego.add(lblCasilla45_Oca);
+		
+		lblCasilla46 = new JLabel("");
+		lblCasilla46.setOpaque(true);
+		lblCasilla46.setBackground(new Color(0, 128, 0));
+		lblCasilla46.setBounds(522, 398, 74, 56);
+		panelJuego.add(lblCasilla46);
+		
+		lblCasilla47 = new JLabel("");
+		lblCasilla47.setOpaque(true);
+		lblCasilla47.setBackground(new Color(0, 255, 0));
+		lblCasilla47.setBounds(522, 344, 74, 56);
+		panelJuego.add(lblCasilla47);
+		
+		lblCasilla48 = new JLabel("");
+		lblCasilla48.setOpaque(true);
+		lblCasilla48.setBackground(new Color(0, 128, 0));
+		lblCasilla48.setBounds(522, 291, 74, 56);
+		panelJuego.add(lblCasilla48);
+		
+		lblCasilla49 = new JLabel("");
+		lblCasilla49.setOpaque(true);
+		lblCasilla49.setBackground(Color.GREEN);
+		lblCasilla49.setBounds(522, 234, 74, 56);
+		panelJuego.add(lblCasilla49);
+		
+		lblCasilla50_Oca = new JLabel("");
+		lblCasilla50_Oca.setOpaque(true);
+		lblCasilla50_Oca.setBackground(Color.BLUE);
+		lblCasilla50_Oca.setBounds(522, 177, 74, 56);
+		panelJuego.add(lblCasilla50_Oca);
+		
+		lblCasilla52 = new JLabel("");
+		lblCasilla52.setOpaque(true);
+		lblCasilla52.setBackground(new Color(0, 128, 0));
+		lblCasilla52.setBounds(410, 74, 56, 74);
+		panelJuego.add(lblCasilla52);
+		
+		lblCasilla53_Dados = new JLabel("");
+		lblCasilla53_Dados.setOpaque(true);
+		lblCasilla53_Dados.setBackground(new Color(255, 0, 128));
+		lblCasilla53_Dados.setBounds(356, 71, 56, 74);
+		panelJuego.add(lblCasilla53_Dados);
+		
+		lblCasilla54Oca = new JLabel("");
+		lblCasilla54Oca.setOpaque(true);
+		lblCasilla54Oca.setBackground(Color.BLUE);
+		lblCasilla54Oca.setBounds(300, 74, 56, 74);
+		panelJuego.add(lblCasilla54Oca);
+		
+		lblCasilla55 = new JLabel("");
+		lblCasilla55.setOpaque(true);
+		lblCasilla55.setBackground(new Color(0, 128, 0));
+		lblCasilla55.setBounds(245, 71, 56, 74);
+		panelJuego.add(lblCasilla55);
+		
+		lblCasilla56 = new JLabel("");
+		lblCasilla56.setOpaque(true);
+		lblCasilla56.setBackground(new Color(0, 255, 64));
+		lblCasilla56.setBounds(189, 74, 56, 74);
+		panelJuego.add(lblCasilla56);
+		
+		lblCasilla57 = new JLabel("");
+		lblCasilla57.setOpaque(true);
+		lblCasilla57.setBackground(Color.GREEN);
+		lblCasilla57.setBounds(73, 71, 115, 108);
+		panelJuego.add(lblCasilla57);
+		
+		lblCasilla58 = new JLabel("");
+		lblCasilla58.setOpaque(true);
+		lblCasilla58.setBackground(new Color(0, 128, 0));
+		lblCasilla58.setBounds(73, 178, 74, 56);
+		panelJuego.add(lblCasilla58);
+		
+		lblCasilla59_Oca = new JLabel("");
+		lblCasilla59_Oca.setOpaque(true);
+		lblCasilla59_Oca.setBackground(Color.BLUE);
+		lblCasilla59_Oca.setBounds(73, 234, 74, 56);
+		panelJuego.add(lblCasilla59_Oca);
+		
+		lblCasilla60 = new JLabel("");
+		lblCasilla60.setOpaque(true);
+		lblCasilla60.setBackground(new Color(0, 128, 0));
+		lblCasilla60.setBounds(73, 290, 74, 56);
+		panelJuego.add(lblCasilla60);
+		
+		lblCasilla61 = new JLabel("");
+		lblCasilla61.setOpaque(true);
+		lblCasilla61.setBackground(new Color(0, 255, 64));
+		lblCasilla61.setBounds(73, 345, 74, 55);
+		panelJuego.add(lblCasilla61);
+		
+		lblCasilla39_1 = new JLabel("");
+		lblCasilla39_1.setOpaque(true);
+		lblCasilla39_1.setBackground(new Color(0, 128, 0));
+		lblCasilla39_1.setBounds(146, 326, 56, 73);
+		panelJuego.add(lblCasilla39_1);
 
 		lblRetroalimentacionJuego = new JLabel("");
 		lblRetroalimentacionJuego.setBounds(691, 293, 187, 269);
@@ -498,19 +618,16 @@ public class VistaOca extends JFrame {
 		panelDados = new JPanel();
 		panelDados.setBounds(691, 10, 187, 246);
 		contentPane.add(panelDados);
-		panelDados.setLayout(null);
 		panelDados.setVisible(false);
+		panelDados.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		lblDado1 = new JLabel("");
-		lblDado1.setBounds(10, 24, 84, 106);
 		panelDados.add(lblDado1);
 
 		lblDado2 = new JLabel("");
-		lblDado2.setBounds(103, 24, 84, 106);
 		panelDados.add(lblDado2);
 
 		btnTirarDados = new JButton("Tirar dados");
-		btnTirarDados.setBounds(25, 189, 152, 21);
 		panelDados.add(btnTirarDados);
 
 		grupoButtonsDados = new ButtonGroup();
